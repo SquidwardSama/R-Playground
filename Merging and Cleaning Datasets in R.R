@@ -1,9 +1,9 @@
-#Importing Macro nutrients File
+#Importing Macronutrients File
 
 Macronutrients <- read.csv("/Users/livingstonakoma/OneDrive/St. Claire College/Semester 4/Capstone Class_ClassFiles_09_08_21/USDA_Macronutrients.csv", stringsAsFactors = FALSE, header = TRUE, sep = ",")
 View(Macronutrients)
 
-#Importing Micro nutrients File
+#Importing Micronutrients File
 
 Micronutrient <- read.csv("/Users/livingstonakoma/OneDrive/St. Claire College/Semester 4/Capstone Class_ClassFiles_09_08_21/USDA_Micronutrients.csv", stringsAsFactors = FALSE, header = TRUE, sep = ",")
 View(Micronutrient)
@@ -40,19 +40,23 @@ SugarMean = mean(final_table$Sugar, na.rm = TRUE)
 SugarMean
 
 final_table[is.na(final_table$Sugar),"Sugar"]= SugarMean
+
 final_table
 
 #Finding NA for Vitamin B and Vitamin D, and replacing it with its mean
 
 VitaminEMean = mean(final_table$VitaminE, na.rm = TRUE)  # Vitamin E Mean
+
 VitaminEMean
 
 VitaminDMean = mean(final_table$VitaminD, na.rm = TRUE)  # Vitamin D Mean
+
 VitaminDMean
 
 #Removing all remaining record with missing values. Naming new data set "USDA Clean"
 
 USDA_Clean <- na.omit(final_table)
+
 USDA_Clean
 
 sum(is.na(USDA_Clean))
