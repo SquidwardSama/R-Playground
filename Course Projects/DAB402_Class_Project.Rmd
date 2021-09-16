@@ -1,11 +1,12 @@
 ---
 Title: 'Class Weekend Project'
 ---
-<center>  <h3> Livingston Akoma </h2> </center>
-<center> <h3> DAB402 - 0773239  </h2> </center>
+**Livingston Akoma
+**DAB402 - 0773239
 ---
 
 #### 1. Read the csv file (USDA_Clean.csv) in the folder and assign it to a data frame. (3 points)
+
 ```{r}
 library(tidyverse)
 library(ggplot2)
@@ -18,11 +19,13 @@ view(class_file)
 ```
 
 #### 2. Check the datatypes of the attributes. (3 points)
+
 ```{r}
 sapply(class_file, class)
 ```
 
 #### 3. Visualize the correlation among Calories, Protein, Total Fat, Carbohydrate, Sodium and Cholesterol. (7 points)
+
 ```{r}
 
 my_data <- class_file[,c("Calories","Protein","TotalFat","Carbohydrate","Sodium","Cholesterol")] 
@@ -33,6 +36,7 @@ round(correlation,2)
 ```
 
 #### 4. Is the correlation between Calories and Total Fat statistically significant? Why? (7 points)
+
 ```{r}
 
 cor(my_data$Calories,my_data$TotalFat) 
@@ -42,6 +46,7 @@ cor(my_data$Calories,my_data$TotalFat)
 ```
 
 #### 5. Create a Linear Regression Model, using Calories as the dependent variable Protein, Total Fat, Carbohydrate, Sodium and Cholesterol as the independent variables. (7 points)
+
 ```{r}
 mod <- lm(Calories ~ Protein + TotalFat + Carbohydrate + Sodium + Cholesterol , data = my_data  ) 
 
@@ -49,6 +54,7 @@ summary(mod)
 ```
 
 #### 6. Write the Linear Regression Equation, using Calories as the dependent variable whereas Protein, TotalFat, Carbohydrate, Sodium and Cholesterol as the independent variables. (7 points)
+
 ```{r}
 
 #  Calories = coef(mod)[1] + coef(mod)[2]*Protein + coef(mod)[3]*TotalFat   +coef(mod)[4]*Carbohydrate + coef(mod)[5]*Sodium + coef(mod)[6]*Cholesterol 
@@ -57,6 +63,7 @@ summary(mod)
 ```
 
 #### 7. Which independent variable is the least significant? Why? (7 points)
+
 ```{r}
 
 # Sodium is the least significant because its p-value (0.122 ) > 0.05. 
@@ -64,6 +71,7 @@ summary(mod)
 ```
 
 #### 8. A new product is just produced with the following data:                                                            Protein=0.1, TotalFat=35, Carbohydrate=405, Sodium=440, Cholesterol=70, Sugar=NA, Calcium=35, Iron=NA, Potassium=35, VitaminC=10,	VitaminE=NA, VitaminD=NA.                                                                                                         Based on the model you created, what is the predicted value for Calories? (7 points)
+
 ```{r}
 
 Calories = coef(mod)[1] + coef(mod)[2] * 0.1 + coef(mod)[3] * 35 +coef(mod)[4] * 405+ coef(mod)[5] * 440 + coef(mod)[6] * 70 
@@ -73,6 +81,7 @@ Calories
 ```
 
 #### 9. If the Sodium amount increases from 440 to 44440 (10000% increase), how much change will occur on Calories in percent? Explain why? (7 points)
+
 ```{r}
 
 
@@ -97,6 +106,7 @@ percentChange_Calories
 
 
 #### A) What are $H_0$ and $H_a$ ? (5 points)
+
 ```{r}
 
 # HO : mean(Article 1 )  =  mean(Article 2) 
@@ -106,11 +116,13 @@ percentChange_Calories
 ```
 
 #### B) Is this a paired or unpaired experiment? (5 points)
+
 ```{r}
 # it is a paired experiment. 
 ```
 
 #### C) Based on your previous answer, which nonparametric test statistic would you use to compare the medians of Article 1 and Article 2. (5 points) 
+
 ```{r}
 
 # wilcoxon signed rank test 
@@ -118,6 +130,7 @@ percentChange_Calories
 ```
 
 #### D) Use a nonparametric test statistic to check if there is a statistically significant difference between the medians of Article 1 and Article 2. (5 points) 
+
 ```{r}
 
 Article_1 <- c(0.40, 0.72, 0.00, 0.36, 0.55) 
@@ -136,6 +149,7 @@ wilcox.test(Article_1,Article_2 , paired = T ,alternative = "less")
 ```
 
 #### E) Will you accept or reject your Null Hypothesis? ($\alpha = 0.05$) Do illustrations improve how the students retell an article or not? Why? (5 points)
+
 ```{r}
 
 # So p-value is greater than 0.05.Thus we do not have enough evidence to reject null hypothesis 
@@ -151,6 +165,7 @@ wilcox.test(Article_1,Article_2 , paired = T ,alternative = "less")
 
 
 #### A) Is this a paired or unpaired experiment? (5 points)
+
 ```{r}
 
 Company_A<- c(97.1,101.3,107.8,101.9,97.4,104.5,99.5,95.1) 
@@ -161,6 +176,7 @@ Company_B <- c(103.5,105.3,106.5,107.9,102.1,105.6,109.8,97.2)
 ```
 
 #### B) Based on your previous answer, which nonparametric test statistic would you use to compare the medians of Company A and Company B. (5 points) 
+
 ```{r}
 
 
@@ -170,6 +186,7 @@ Company_B <- c(103.5,105.3,106.5,107.9,102.1,105.6,109.8,97.2)
 ```
 
 #### C) Use a nonparametric test statistic to check if there is a statistically significant difference between the medians of Company A and Company B. (5 points) 
+
 ```{r}
 
 
@@ -186,6 +203,7 @@ wilcox.test(Company_A,Company_B)
 ```
 
 #### D) Will you accept or reject your Null Hypothesis? ($\alpha = 0.05$) Are packaging process similar or different based on weight measurements? Why? (5 points)
+
 ```{r}
 
 
