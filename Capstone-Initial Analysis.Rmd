@@ -1,7 +1,6 @@
 ---
 title: "Initial Analysis"
-output: html_notebook
-Authors: 
+Authors: Livingston Akoma
 ---
 
 ###### The dataset used are the results from a marketing campaign run by a bank in Portugal. The purpose of the campaign was to get bank customers to sign up for a term deposit, a banking product they offer.
