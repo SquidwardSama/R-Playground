@@ -1,0 +1,92 @@
+---
+title: "Assignment 3: Creating Decision Tree"
+output: html_notebook
+---
+
+```{r Loading Libraries}
+
+library(party)
+library(dplyr)
+library(tidyverse)
+library(randomForest)
+library(knitr)
+```
+
+```{r Loading Dataset}
+
+titanic_baby <-read.csv("https://raw.githubusercontent.com/guru99-edu/R-Programming/master/titanic_data.csv")
+
+
+```
+
+```{r Checking Data}
+
+names(titanic_baby)
+
+sapply(titanic_baby, class)
+
+unique(titanic_baby)
+
+filter(titanic_baby, cabin == "?")
+filter(titanic_baby, age == "?")
+filter(titanic_baby, home.dest == "?")
+filter(titanic_baby, sex == "?")
+```
+
+
+```{r Removing "?" rows in columns}
+
+titanic_baby <- subset(titanic_baby, age != "?" & !age < 1 & cabin !="?" & home.dest !="?")
+
+#Check
+filter(titanic_baby, cabin == "?")
+filter(titanic_baby, age == "?")
+filter(titanic_baby, home.dest == "?")
+filter(titanic_baby, sex == "?")
+```
+
+```{r Changing data types}
+
+#Conversion
+titanic_baby <- as.data.frame(unclass(titanic_baby), stringsAsFactors = TRUE)
+
+#Check
+sapply(titanic_baby, class)
+
+titanic_baby
+
+#changing age to numeric
+titanic_baby <-  titanic_baby %>% mutate_at(vars(age, fare), as.numeric)
+
+#Check
+titanic_baby
+
+```
+
+```{r Implementing Decision Tree}
+
+titanic_tree <- ctree(sex~., data = titanic_baby)
+
+plot(titanic_tree, type= 'simple')
+
+levels(titanic_baby$sex)
+```
+
+```{r Implementing Random Forest}
+
+#removing category columns to ease load
+
+titanic_baby<- titanic_baby %>% select(-x,-name,-home.dest,-cabin,-ticket)
+
+#Check
+str(titanic_baby)
+
+#Implement Random Forest
+titanic_forest <- randomForest(sex ~., data = titanic_baby)
+
+titanic_forest
+
+importance(titanic_forest)
+
+```
+
